@@ -11,7 +11,9 @@ export function Content({ activeData }) {
   const navigate = useNavigate();
 
   const handleApplyNow = () => {
-    navigate("/job");
+    if (activeData?.id) {
+      navigate(`/jobapply?id=${activeData.id}`);
+    }
   };
 
   useEffect(() => {

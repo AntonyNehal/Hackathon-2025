@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-// import userRoutes from "./routes/user.route.js";
 import cors from "cors";
 import bcrypt from "bcryptjs";
 import User from "./models/user.models.js";
@@ -11,7 +10,7 @@ mongoose
   .then(() => {
     console.log("mongodb connected");
   })
-  .catch(() => {
+  .catch((err) => {
     console.log(err);
   });
 const app = express();
