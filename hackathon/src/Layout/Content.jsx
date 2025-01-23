@@ -74,7 +74,7 @@ export function Content({ activeData }) {
       <div className="flex justify-start flex-col items-start w-2/3">
         <h1
           ref={headingRef}
-          className="text-left text-5xl font-bold mb-1 w-full relative p-1 overflow-hidden md:text-[7vw] md:md-2"
+          className="text-left text-5xl font-bold mb-1 w-full relative p-1 overflow-hidden md:text-[4vw] md:md-2"
         >
           {activeData.heading}
         </h1>
@@ -95,7 +95,7 @@ export function Content({ activeData }) {
             ref={buttonRef}
             className="cursor-pointer button rounded-2xl outline-none px-8 py-2 font-medium md:px-10 md:py-4"
           >
-            Shop Now
+            Apply Now
           </button>
         </div>
       </div>

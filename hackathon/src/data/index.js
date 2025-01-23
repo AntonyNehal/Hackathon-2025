@@ -1,9 +1,9 @@
 export const data = [
   {
     id: 1,
-    heading: "Antony Nehal",
-    subHeading: "Unwavering Beige Beauty",
-    text: "It is a versatile and neutral color that can be paired with a variety of different outfits and styles.",
+    heading: "Scientist Research & Development",
+    subHeading: "Innovate in Advanced Defence Technologies",
+    text: "Join DRDO as a Scientist ‘B’ and contribute to cutting-edge research and development in defense systems.",
     swatchColor: "#E6D3C4",
     background: "#E5E5E5",
     headingColor: "#000",
@@ -22,9 +22,9 @@ export const data = [
   },
   {
     id: 2,
-    heading: "Huma Harris",
-    subHeading: "Chestnut with red tint.",
-    text: " The brown color of the bag adds a touch of warmth and earthiness to its appearance, making it suitable for a wide range of occasions and outfits.",
+    heading: "Technical Officer",
+    subHeading: "Shape the Future of Defense Communication Systems",
+    text: "This role offers hands-on experience with state-of-the-art equipment, ensuring seamless connectivity and security in defense operations.",
 
     swatchColor: "#4e4641",
     background: "#79716C",
@@ -44,9 +44,9 @@ export const data = [
   },
   {
     id: 3,
-    heading: "Chuthiya Parava",
-    subHeading: "Ocean with coral tint.",
-    text: "The color blue is often associated with calmness, trust, and intelligence, making a blue backpack a great choice for anyone looking for a stylish and versatile bagpack.",
+    heading: "Junior Research Fellow",
+    subHeading: "Pursue Your Research Passion with DRDO.",
+    text: "Collaborate with top scientists and engineers to advance defense aviation technologies while gaining valuable research experience in a dynamic environment.",
 
     swatchColor: "#4F92B1",
     background: "#C1D6E3",
