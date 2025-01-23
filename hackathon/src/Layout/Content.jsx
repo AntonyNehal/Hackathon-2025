@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 export function Content({ activeData }) {
   // Refs for elements to animate
@@ -7,6 +8,11 @@ export function Content({ activeData }) {
   const subHeadingRef = useRef();
   const textRef = useRef();
   const buttonRef = useRef();
+  const navigate = useNavigate();
+
+  const handleApplyNow = () => {
+    navigate("/job");
+  };
 
   useEffect(() => {
     // Animate heading
@@ -94,6 +100,7 @@ export function Content({ activeData }) {
           <button
             ref={buttonRef}
             className="cursor-pointer button rounded-2xl outline-none px-8 py-2 font-medium md:px-10 md:py-4"
+            onClick={handleApplyNow}
           >
             Apply Now
           </button>

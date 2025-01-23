@@ -55,10 +55,10 @@ function About() {
           backgroundSize: "100% auto", // Fits the width fully and adjusts height automatically
           backgroundPosition: "top center", // Keeps the focus at the top of the image
           backgroundRepeat: "no-repeat",
-          height: "400px",
+          height: "750px",
           position: "relative",
           width: "100%",
-          clipPath: "inset(10% 0% 0% 0%)",
+          clipPath: "inset(0% 0% 0% 0%)",
         }}
       ></header>
       <>
