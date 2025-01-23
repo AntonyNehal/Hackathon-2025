@@ -1,29 +1,6 @@
-// import React from "react";
-
-// function About() {
-//   return (
-//     <div>
-//       <header
-//         className="flex flex-col justify-end text-black"
-//         style={{
-//           backgroundImage:
-//             "url('https://jkadworld.com/wp-content/uploads/2024/09/DRDO.webp')",
-//           backgroundSize: "100%",
-//           backgroundPosition: "center",
-//           backgroundRepeat: "no-repeat",
-//           height: "200px",
-//           position: "relative",
-//         }}
-//       ></header>
-//     </div>
-//   );
-// }
-
-// export default About;
-
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-
+import { Link, useNavigate } from "react-router-dom";
 function About() {
   const headerRef = useRef(null);
   const imageRef = useRef(null);
@@ -31,16 +8,16 @@ function About() {
     // GSAP animation for zoom-in effect on load
     gsap.fromTo(
       headerRef.current,
-      { scale: 1.2, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 1.5, ease: "power2.out" }
+      { scale: 1.8, opacity: 0 },
+      { scale: 0.9, opacity: 1, duration: 1, ease: "power2.out" }
     );
   }, []);
   useEffect(() => {
     // GSAP animation: Fade in and slide the image from the right
     gsap.fromTo(
       imageRef.current,
-      { opacity: 0, x: 100 },
-      { opacity: 1, x: 0, duration: 1.5, ease: "power2.out" }
+      { opacity: 0, x: 500 },
+      { opacity: 1, x: 0, duration: 2.5, ease: "power2.out" }
     );
   }, []);
 
@@ -53,16 +30,50 @@ function About() {
           backgroundImage:
             "url('https://jkadworld.com/wp-content/uploads/2024/09/DRDO.webp')",
           backgroundSize: "100% auto", // Fits the width fully and adjusts height automatically
-          backgroundPosition: "top center", // Keeps the focus at the top of the image
+          backgroundPosition: "top centre", // Keeps the focus at the top of the image
           backgroundRepeat: "no-repeat",
           height: "750px",
           position: "relative",
           width: "100%",
-          clipPath: "inset(0% 0% 0% 0%)",
+          clipPath: "inset(10% 0% 0% 0%)",
         }}
-      ></header>
+      >
+        <nav className="flex items-center justify-between bg-transparent p-4">
+          <div className="text-3xl font-bold">
+            <Link to="/" className="text-white">
+              DRDO
+            </Link>
+          </div>
+          <ul className="flex space-x-6">
+            <li>
+              <Link
+                to="/"
+                className="text-white hover:underline text-2xl font-semibold"
+              >
+                Home
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/register"
+                className="text-white hover:underline text-2xl font-semibold"
+              >
+                Apply Job
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/login"
+                className="text-white hover:underline text-2xl font-semibold"
+              >
+                Login
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <>
-        <br />
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 p-8">
           {/* Text Section */}
           <div className="md:w-2/3 text-left">

@@ -6,14 +6,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import JobRegistration from "./pages/JobRegistration";
+import Jobapply from "./pages/Jobapply";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Banner />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/job" element={<Banner />} />
+        <Route path="/" element={<About />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/job" element={<JobRegistration />} />
+        <Route path="/register" element={<JobRegistration />} />
+        <Route path="/jobapply" element={<Jobapply />} />
       </Routes>
     </BrowserRouter>
   );
