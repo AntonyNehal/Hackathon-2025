@@ -1,206 +1,151 @@
-import React, { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import React, { useState } from "react";
 
 const JobRegistration = () => {
-  const formRef = useRef(null);
-
-  // GSAP animation effect
-  useEffect(() => {
-    gsap.fromTo(
-      formRef.current,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
-    );
-  }, []);
-
   const [formData, setFormData] = useState({
-    firstName: "",
-    secondName: "",
-    email: "",
-    phone: "",
-    dob: "",
-    gender: "",
     address: "",
-    qualifications: "",
-    experience: "",
-    jobRole: "",
-    resume: null,
+    city: "",
+    state: "",
+    pincode: "",
+    highschool: { board: "", year: "", marks: "" },
+    intermediate: { board: "", year: "", marks: "" },
+    graduation: { board: "", year: "", marks: "" },
+    termsAccepted: false,
   });
 
   const handleChange = (e) => {
-    const { name, value, type, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === "file" ? files[0] : value,
-    });
+    const { name, value } = e.target;
+    if (name.includes(".")) {
+      const [section, field] = name.split(".");
+      setFormData({
+        ...formData,
+        [section]: { ...formData[section], [field]: value },
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
+
+  const handleCheckboxChange = (e) => {
+    setFormData({ ...formData, termsAccepted: e.target.checked });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
+
+    console.log(formData);
+    alert("Form submitted successfully");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div
-        className="bg-white shadow-lg rounded-lg p-8 max-w-2xl w-full"
-        ref={formRef}
-      >
-        <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
-          DRDO Registration
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+          Registration Form
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700">Job Role</label>
-            <select
-              name="jobRole"
-              value={formData.jobRole}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
-            >
-              <option value="">Select Job Role</option>
-              <option value="Scientist Research & Development">
-                Scientist Research & Development
-              </option>
-              <option value="Technical Officer">Technical Officer</option>
-              <option value="Junior Research Fellow">
-                Junior Research Fellow
-              </option>
-            </select>
-          </div>
 
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Address Section */}
           <div>
-            <label className="block text-gray-700">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700">Last Name</label>
-            <input
-              type="text"
-              name="secondName"
-              value={formData.secondName}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-gray-700">Email</label>
+            <h3 className="text-xl font-semibold text-gray-700 border-b-2 border-yellow-500 mb-4">
+              ADDRESS
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
-                type="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                name="address"
+                placeholder="Address"
+                value={formData.address}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-                required
+                className="p-3 border border-gray-300 rounded-md w-full"
               />
-            </div>
-            <div>
-              <label className="block text-gray-700">Phone Number</label>
               <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
+                type="text"
+                name="city"
+                placeholder="City"
+                value={formData.city}
                 onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-                required
+                className="p-3 border border-gray-300 rounded-md w-full"
+              />
+              <input
+                type="text"
+                name="state"
+                placeholder="State"
+                value={formData.state}
+                onChange={handleChange}
+                className="p-3 border border-gray-300 rounded-md w-full"
+              />
+              <input
+                type="text"
+                name="pincode"
+                placeholder="Pincode"
+                value={formData.pincode}
+                onChange={handleChange}
+                className="p-3 border border-gray-300 rounded-md w-full"
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-gray-700">Date of Birth</label>
-              <input
-                type="date"
-                name="dob"
-                value={formData.dob}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700">Gender</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-                required
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+          {/* Academic Qualification Section */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-700 border-b-2 border-yellow-500 mb-4">
+              ACADEMIC QUALIFICATION
+            </h3>
+            {["highschool", "intermediate", "graduation"].map((level) => (
+              <div key={level} className="grid grid-cols-4 gap-4 mb-4">
+                <input
+                  type="text"
+                  placeholder={level.charAt(0).toUpperCase() + level.slice(1)}
+                  disabled
+                  className="p-3 border border-gray-300 rounded-md w-full bg-gray-100"
+                />
+                <input
+                  type="text"
+                  name={`${level}.board`}
+                  placeholder="Board/University"
+                  value={formData[level].board}
+                  onChange={handleChange}
+                  className="p-3 border border-gray-300 rounded-md w-full"
+                />
+                <input
+                  type="text"
+                  name={`${level}.year`}
+                  placeholder="Year of Passing"
+                  value={formData[level].year}
+                  onChange={handleChange}
+                  className="p-3 border border-gray-300 rounded-md w-full"
+                />
+                <input
+                  type="text"
+                  name={`${level}.marks`}
+                  placeholder="% of marks"
+                  value={formData[level].marks}
+                  onChange={handleChange}
+                  className="p-3 border border-gray-300 rounded-md w-full"
+                />
+              </div>
+            ))}
           </div>
 
-          <div>
-            <label className="block text-gray-700">Address</label>
-            <textarea
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
-            ></textarea>
-          </div>
-
-          <div>
-            <label className="block text-gray-700">G</label>
+          {/* Terms and Conditions */}
+          <div className="flex items-center space-x-2">
             <input
-              type="text"
-              name="qualifications"
-              value={formData.qualifications}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
+              type="checkbox"
+              checked={formData.termsAccepted}
+              onChange={handleCheckboxChange}
+              className="w-5 h-5 border-gray-300 rounded-md"
             />
+            <label className="text-gray-700 text-sm">
+              All Terms and Conditions
+            </label>
           </div>
 
-          <div>
-            <label className="block text-gray-700">Experience (in years)</label>
-            <input
-              type="number"
-              name="experience"
-              value={formData.experience}
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700">Upload Resume</label>
-            <input
-              type="file"
-              name="resume"
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-300"
-              required
-            />
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              Submit
-            </button>
-          </div>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>
