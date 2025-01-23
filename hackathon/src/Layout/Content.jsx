@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 export function Content({ activeData }) {
   // Refs for elements to animate
   const headingRef = useRef();
@@ -10,8 +10,11 @@ export function Content({ activeData }) {
   const buttonRef = useRef();
   const navigate = useNavigate();
 
+  const { userData } = useSelector((state) => state.user);
+
   const handleApplyNow = () => {
     if (activeData?.id) {
+      // Navigate to /jobapply with only the job ID as a query parameter
       navigate(`/jobapply?id=${activeData.id}`);
     }
   };

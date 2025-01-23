@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { signInSuccess } from "../redux/user/userSlice.js";
 const JobRegistration = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -52,6 +55,7 @@ const JobRegistration = () => {
       if (response.ok) {
         alert("Form submitted successfully!");
         console.log(data);
+        dispatch(signInSuccess(data));
         navigate("/job");
       } else {
         alert(data.message || "Error submitting the form");

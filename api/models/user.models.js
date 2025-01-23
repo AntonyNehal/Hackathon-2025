@@ -29,6 +29,24 @@ const userSchema = new mongoose.Schema(
       marks: { type: Number, required: true },
     },
     password: { type: String, required: true },
+
+    // Job Application Data
+    jobApplications: [
+      {
+        jobId: { type: Number, required: true },
+        aadhaar: { type: String, required: true },
+        category: { type: String, required: true },
+        marks: { type: Number, required: true },
+        workExperience: [
+          {
+            organization: { type: String, required: true },
+            role: { type: String, required: true },
+            field: { type: String, required: true },
+            yearsOfExperience: { type: String, required: true },
+          },
+        ],
+      },
+    ],
   },
   { timestamps: true }
 );

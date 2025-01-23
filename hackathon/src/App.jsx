@@ -7,6 +7,8 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import JobRegistration from "./pages/JobRegistration";
 import Specificjob from "./pages/Specificjob";
+import ProfilePage from "./pages/ProfilePage";
+import Apply from "./pages/Apply";
 function App() {
   return (
     <BrowserRouter>
@@ -16,6 +18,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<JobRegistration />} />
         <Route path="/jobapply" element={<Specificjob />} />
+        <Route path="/dashboard" element={<ProfilePage />} />
+        <Route path="/apply" element={<Apply />} />
       </Routes>
     </BrowserRouter>
   );

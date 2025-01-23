@@ -3,6 +3,7 @@ import { Content } from "./Content";
 import { data } from "../data";
 import Canvas from "./canvas";
 import gsap from "gsap";
+import Navbar from "../Components/Navbar";
 function Banner() {
   const banner = useRef();
   const [activeData, setActiveData] = useState(data[1]);
@@ -28,9 +29,8 @@ function Banner() {
 
   return (
     <div ref={banner} className="w-screen h-screen relative">
-      <div className="logo absolute my-2 ml-6 text-left text-2xl font-bold tracking-widest md:ml-28 lg:ml-[12vw] lg:my-8">
-        DRDO
-      </div>
+      <Navbar />
+      <div className="logo absolute my-2 ml-6 text-left text-2xl font-bold tracking-widest md:ml-28 lg:ml-[12vw] lg:my-8"></div>
       <div className="w-full h-full flex justify-between items-center flex-col lg:flex-row-reverse">
         <Canvas
           activeData={activeData}

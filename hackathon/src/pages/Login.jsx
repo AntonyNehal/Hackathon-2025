@@ -1,19 +1,49 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error: reduxError } = useSelector((state) => state.user);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Implement the login logic (e.g., API call to validate user)
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+
     if (email === "" || password === "") {
       setError("Please fill in both fields");
     } else {
-      // Replace with real authentication logic
-      console.log("Logging in with:", email, password);
-      setError("");
+      dispatch(signInStart()); // Dispatch start of login process
+      try {
+        const response = await fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          dispatch(signInSuccess(data.userData)); // Store user email in Redux
+          navigate("/job"); // Redirect to job page
+        } else {
+          dispatch(signInFailure(data.message)); // Dispatch failure with error message
+          setError(data.message);
+        }
+      } catch (error) {
+        dispatch(signInFailure("Something went wrong. Please try again.")); // Dispatch error
+        setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -26,6 +56,11 @@ const Login = () => {
         {error && (
           <div className="bg-red-500 text-white text-center p-2 rounded mb-4">
             {error}
+          </div>
+        )}
+        {reduxError && (
+          <div className="bg-red-500 text-white text-center p-2 rounded mb-4">
+            {reduxError}
           </div>
         )}
         <form onSubmit={handleLogin} className="space-y-4">
@@ -67,8 +102,9 @@ const Login = () => {
             <button
               type="submit"
               className="w-full py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>
